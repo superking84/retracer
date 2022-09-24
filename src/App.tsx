@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 
 interface ActionPair {
@@ -17,12 +17,10 @@ let actionPairs: ActionPair[] = [
 
 const capitalize = (str: string) => str[0].toUpperCase() + str.slice(1);
 
-function App() {
+const App = () => {
   const [forwardList, setForwardList] = useState<Action[]>([]);
   const [forwardListInput, setForwardListInput] = useState<string>("");
   const [actionTypeId, setActionTypeId] = useState<number>(0);
-
-  const [addButtonDisabled, setAddButtonDisabled] = useState<boolean>(false);
 
   const [backwardList, setBackwardList] = useState<Action[]>([]);
 
@@ -40,19 +38,30 @@ function App() {
       setForwardList([...forwardList, action]);
       setBackwardList([action, ...backwardList]);
       setForwardListInput("");
+      setActionTypeId(0);
     }
+  };
+
+  const deleteItem = (id: number) => {
+    setForwardList(forwardList.filter((x) => x.id !== id));
+    setBackwardList(backwardList.filter((x) => x.id !== id));
   };
 
   return (
     <div className="App">
-      <ol>
-        FORWARD LIST
+      <ul>
+        Actions taken...
         {forwardList.map((item, i) => (
-          <li
+          <ActionListItem
             key={`forward-item-${i}`}
-          >{`${item.action} ${item.actionObject}`}</li>
+            id={item.id}
+            isForwards={true}
+            actionType={item.action}
+            actionObject={item.actionObject}
+            deleteItem={deleteItem}
+          />
         ))}
-      </ol>
+      </ul>
 
       <div className="form-group">
         <div className="row mb-3">
@@ -60,7 +69,7 @@ function App() {
             <label htmlFor="forward-list-select">Select an action</label>
             <select
               className="form-select"
-              defaultValue={0}
+              value={actionTypeId}
               onChange={function (e) {
                 setActionTypeId(parseInt(e.target.value));
               }}
@@ -94,23 +103,58 @@ function App() {
             className="btn btn-primary add-forward-item-button"
             type="button"
             onClick={updateLists}
-            disabled={addButtonDisabled}
           >
             Add Item
           </button>
         </div>
       </div>
       <hr />
+
       <ol>
-        BACKWARD LIST
+        To go back...
         {backwardList.map((item, i) => (
-          <li
+          <ActionListItem
             key={`backward-item-${i}`}
-          >{`${item.mirrorAction} ${item.actionObject}`}</li>
+            id={item.id}
+            isForwards={false}
+            actionType={item.mirrorAction}
+            actionObject={item.actionObject}
+            deleteItem={deleteItem}
+          />
         ))}
       </ol>
     </div>
   );
+};
+
+interface ActionListItemProps {
+  id: number;
+  isForwards: boolean;
+  actionType: string;
+  actionObject: string;
+  deleteItem(actionTypeId: number): void;
 }
+
+const ActionListItem = (props: ActionListItemProps) => {
+  return (
+    <li>
+      <div className="card">
+        <div className="card-body">
+          <div className="row card-text">
+            <div className="col-10">
+              <span>{`${props.actionType} ${props.actionObject}`}</span>
+            </div>
+            <div
+              className="delete col-2"
+              onClick={() => props.deleteItem(props.id)}
+            >
+              <i className="fa fa-trash" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  );
+};
 
 export default App;
