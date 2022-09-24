@@ -7,3 +7,30 @@
 .add-forward-item-button {
   margin-top: 5px;
 }
+
+.card {
+  margin-bottom: 5px;
+}
+
+
+.card-body {
+  background-color: blue;
+}
+
+.card-body .row {
+  height: 100%;
+}
+.card-body .delete:hover {
+  background-color: white;
+  color: blue;
+}
+
+.card-text {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+li {
+  list-style: none;
+  cursor: pointer;
+}
