@@ -1,5 +1,6 @@
 interface ActionListItemProps {
-  id: number;
+  actionId: number;
+  order: number;
   actionType: string;
   actionObject: string;
   deleteItem(actionTypeId: number): void;
@@ -7,17 +8,22 @@ interface ActionListItemProps {
 
 export const ActionListItem = (props: ActionListItemProps) => {
   return (
-    <li>
+    <li className="action-list-item mb-1">
       <div className="btn btn-primary px-3">
         <div className="row">
-          <div className="col-10">
+          <div className="col-1">
+            <span>{props.order}</span>
+          </div>
+
+          <div className="col-9">
             <span>{`${props.actionType} ${props.actionObject}`}</span>
           </div>
+
           <div
             className="delete col-2"
             onClick={(e) => {
               e.stopPropagation();
-              props.deleteItem(props.id);
+              props.deleteItem(props.actionId);
             }}
           >
             <i className="fa fa-trash" />

@@ -1,11 +1,21 @@
 import { useState } from "react";
-import { Action, ActionPair } from "./Action";
+import { Action, ActionType } from "./Action";
 
 const capitalize = (str: string) => str[0].toUpperCase() + str.slice(1);
-let actionPairs: ActionPair[] = [
-  { id: 1, action: "attach", mirrorAction: "detach" },
-  { id: 2, action: "screw in", mirrorAction: "unscrew" },
-  { id: 3, action: "fold", mirrorAction: "unfold" },
+const getId = (() => {
+  let id = 0;
+
+  return () => {
+    id += 1;
+
+    return id;
+  };
+})();
+
+let actionTypes: ActionType[] = [
+  { actionTypeId: 1, action: "attach", mirrorAction: "detach" },
+  { actionTypeId: 2, action: "screw in", mirrorAction: "unscrew" },
+  { actionTypeId: 3, action: "fold", mirrorAction: "unfold" },
 ];
 
 interface ItemEntryFormProps {
@@ -23,10 +33,13 @@ export const ItemEntryForm = (props: ItemEntryFormProps) => {
       return;
     }
 
-    const pair = actionPairs.find((ap) => ap.id === actionTypeId);
-    if (pair) {
+    const actionType = actionTypes.find(
+      (ap) => ap.actionTypeId === actionTypeId
+    );
+    if (actionType) {
       const action: Action = {
-        ...pair,
+        ...actionType,
+        actionId: getId(),
         actionObject: forwardListInput,
       };
       props.setForwardList([...props.forwardList, action]);
@@ -49,8 +62,11 @@ export const ItemEntryForm = (props: ItemEntryFormProps) => {
             aria-label="choose action type"
           >
             <option value={0}>Choose an action</option>
-            {actionPairs.map((ap) => (
-              <option key={`action-type-${ap.id}`} value={ap.id}>
+            {actionTypes.map((ap) => (
+              <option
+                key={`action-type-${ap.actionTypeId}`}
+                value={ap.actionTypeId}
+              >
                 {capitalize(ap.action)}
               </option>
             ))}
@@ -76,11 +92,12 @@ export const ItemEntryForm = (props: ItemEntryFormProps) => {
 
       <div className="row">
         <button
-          className="btn btn-primary add-forward-item-button"
+          className="btn btn-success add-forward-item-button"
           type="button"
           onClick={updateLists}
         >
-          Add Item
+          <i className="fa fa-plus"></i>
+          <span className="mx-3">Add Item</span>
         </button>
       </div>
     </div>

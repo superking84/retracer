@@ -1,7 +1,7 @@
-export interface ActionPair {
-    id: number;
+export interface ActionType {
+    actionTypeId: number;
     action: string;
     mirrorAction: string;
 }
   
-export type Action = ActionPair & { actionObject: string };
+export type Action = ActionType & { actionId: number; actionObject: string };
