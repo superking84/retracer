@@ -1,3 +1,5 @@
+import { capitalize } from "./utilities";
+
 interface ActionListItemProps {
   actionId: number;
   order: number;
@@ -16,11 +18,13 @@ export const ActionListItem = (props: ActionListItemProps) => {
           </div>
 
           <div className="col-9">
-            <span>{`${props.actionType} ${props.actionObject}`}</span>
+            <span>
+              {capitalize(`${props.actionType} ${props.actionObject}`)}
+            </span>
           </div>
 
           <div
-            className="delete col-2"
+            className="delete col-2 border-start"
             onClick={(e) => {
               e.stopPropagation();
               props.deleteItem(props.actionId);
