@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ActionListItem } from "./ActionListItem";
 import "./App.css";
 
 interface ActionPair {
@@ -94,6 +95,7 @@ const App = () => {
               className="form-control"
               value={forwardListInput}
               onChange={(e) => setForwardListInput(e.target.value)}
+              aria-label="describe object of action"
             />
           </div>
         </div>
@@ -124,36 +126,6 @@ const App = () => {
         ))}
       </ol>
     </div>
-  );
-};
-
-interface ActionListItemProps {
-  id: number;
-  isForwards: boolean;
-  actionType: string;
-  actionObject: string;
-  deleteItem(actionTypeId: number): void;
-}
-
-const ActionListItem = (props: ActionListItemProps) => {
-  return (
-    <li>
-      <div className="card">
-        <div className="card-body">
-          <div className="row card-text">
-            <div className="col-10">
-              <span>{`${props.actionType} ${props.actionObject}`}</span>
-            </div>
-            <div
-              className="delete col-2"
-              onClick={() => props.deleteItem(props.id)}
-            >
-              <i className="fa fa-trash" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
   );
 };
 
