@@ -17,10 +17,18 @@
 .action-list-item .btn {
   width: 100%;
   border: 1px solid black;
-  height: 4rem;
+  min-height: 4rem;
+  height: fit-content;
   line-height: 3rem;
 }
 
 .action-list-item .btn * {
   font-size: larger;
+}
+
+.delete {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
 }
