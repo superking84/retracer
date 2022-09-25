@@ -12,16 +12,16 @@
   margin-bottom: 5px;
 }
 
-
 .card-body {
   background-color: blue;
 }
 
 .card-body .row {
-  height: 100%;
+  width: 100%;
 }
+
 .card-body .delete:hover {
-  background-color: white;
+  overflow: hidden;
   color: blue;
 }
 
