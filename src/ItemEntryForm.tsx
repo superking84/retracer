@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Action, ActionType } from "./Action";
+import { capitalize } from "./utilities";
 
-const capitalize = (str: string) => str[0].toUpperCase() + str.slice(1);
 const getId = (() => {
   let id = 0;
 
@@ -97,7 +97,7 @@ export const ItemEntryForm = (props: ItemEntryFormProps) => {
           onClick={updateLists}
         >
           <i className="fa fa-plus"></i>
-          <span className="mx-3">Add Item</span>
+          <span className="mx-3 d-none d-sm-inline">Add Item</span>
         </button>
       </div>
     </div>
