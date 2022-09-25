@@ -22,7 +22,22 @@ const App = () => {
 
   return (
     <div className="App">
+      <h1 className="display-1">Retracer</h1>
       <div id="entry-form" className="collapse show">
+        <h2 className="display-6">Easily retrace your steps!</h2>
+        <h6>
+          Select an action and an item, hit the Add button below, and Retracer
+          will help you retrace your steps so you can easily put that Ikea bed
+          back together!
+        </h6>
+        <h6>
+          A couple of prebuilt actions are provided, but you can easily add more
+          by pressing the big button next to the action list.
+        </h6>
+        <h6>
+          After adding your actions, just hit the "Show Retraced Steps" button
+          at the bottom!
+        </h6>
         <ItemEntryForm
           forwardList={forwardList}
           backwardList={backwardList}
@@ -53,7 +68,7 @@ const App = () => {
           onClick={() => setIsForward(!isForward)}
         >
           <i className="fa fa-refresh"></i>
-          <span className="mx-3 d-none d-sm-inline">Show other list</span>
+          <span className="mx-3 d-none d-sm-inline">Show Retraced Steps</span>
         </button>
       </div>
 

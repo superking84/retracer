@@ -124,7 +124,7 @@ export const ItemEntryForm = (props: ItemEntryFormProps) => {
             aria-label="describe object of action"
           />
           <label className="" htmlFor="forward-list-input">
-            Description
+            Description (e.g., "bed frame", "screw", etc.)
           </label>
         </div>
       </div>
