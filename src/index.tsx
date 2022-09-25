@@ -4,6 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/js/src/collapse.js";
+import "bootstrap/js/src/modal.js";
 import "./index.css";
 
 const root = ReactDOM.createRoot(

@@ -26,9 +26,13 @@
   font-size: larger;
 }
 
-.delete {
+.vertical-center {
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: column;
+}
+
+.add-action-type-button {
+  height: 100%;
 }

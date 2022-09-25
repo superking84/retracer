@@ -29,11 +29,10 @@ const App = () => {
           setForwardList={setForwardList}
           setBackwardList={setBackwardList}
         />
+        <hr />
       </div>
 
-      <hr />
-
-      <div className="row mb-5">
+      <div className="row mb-5 mt-2">
         <button
           type="button"
           id="collapse-form-button"
