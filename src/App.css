@@ -1,6 +1,7 @@
 .App {
   text-align: center;
-  width: 50%;
+  width: 80%;
+  max-width: 500px;
   margin: 0 auto;
 }
 
@@ -8,29 +9,18 @@
   margin-top: 5px;
 }
 
-.card {
-  margin-bottom: 5px;
+.action-list {
+  padding: 0;
+  list-style-type: none;
 }
 
-.card-body {
-  background-color: blue;
-}
-
-.card-body .row {
+.action-list-item .btn {
   width: 100%;
+  border: 1px solid black;
+  height: 4rem;
+  line-height: 3rem;
 }
 
-.card-body .delete:hover {
-  overflow: hidden;
-  color: blue;
-}
-
-.card-text {
-  font-weight: bold;
-  font-size: x-large;
-}
-
-li {
-  list-style: none;
-  cursor: pointer;
+.action-list-item .btn * {
+  font-size: larger;
 }
