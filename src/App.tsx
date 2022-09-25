@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Action } from "./Action";
 import { ActionList } from "./ActionList";
 import "./App.css";
@@ -13,6 +13,12 @@ const App = () => {
     setForwardList(forwardList.filter((x) => x.actionId !== actionId));
     setBackwardList(backwardList.filter((x) => x.actionId !== actionId));
   };
+
+  useEffect(() => {
+    if (forwardList.length === 0) {
+      setIsForward(true);
+    }
+  }, [forwardList]);
 
   return (
     <div className="App">
@@ -52,12 +58,19 @@ const App = () => {
         </button>
       </div>
 
-      <h3 className="display-3">test</h3>
-      <ActionList
-        actionList={isForward ? forwardList : backwardList}
-        deleteItem={deleteItem}
-        isForward={isForward}
-      />
+      {forwardList.length > 0 && (
+        <>
+          <h3 className="display-4">
+            {isForward ? "What you've done:" : "Retrace your steps:"}
+          </h3>
+
+          <ActionList
+            actionList={isForward ? forwardList : backwardList}
+            deleteItem={deleteItem}
+            isForward={isForward}
+          />
+        </>
+      )}
     </div>
   );
 };
