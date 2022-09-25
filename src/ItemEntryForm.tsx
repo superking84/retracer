@@ -7,16 +7,6 @@ const getActionId = makeIdGenerator();
 const getActionTypeId = makeIdGenerator();
 const modalId = "add-action-type-modal";
 
-let actionTypes: ActionType[] = [
-  { actionTypeId: getActionTypeId(), action: "attach", mirrorAction: "detach" },
-  {
-    actionTypeId: getActionTypeId(),
-    action: "screw in",
-    mirrorAction: "unscrew",
-  },
-  { actionTypeId: getActionTypeId(), action: "fold", mirrorAction: "unfold" },
-];
-
 interface ItemEntryFormProps {
   forwardList: Action[];
   setForwardList: React.Dispatch<React.SetStateAction<Action[]>>;
@@ -25,6 +15,19 @@ interface ItemEntryFormProps {
 }
 
 export const ItemEntryForm = (props: ItemEntryFormProps) => {
+  const [actionTypes, setActionTypes] = useState<ActionType[]>([
+    {
+      actionTypeId: getActionTypeId(),
+      action: "attach",
+      mirrorAction: "detach",
+    },
+    {
+      actionTypeId: getActionTypeId(),
+      action: "screw in",
+      mirrorAction: "unscrew",
+    },
+    { actionTypeId: getActionTypeId(), action: "fold", mirrorAction: "unfold" },
+  ]);
   const [forwardListInput, setForwardListInput] = useState<string>("");
   const [actionTypeId, setActionTypeId] = useState<number>(0);
 
@@ -56,17 +59,19 @@ export const ItemEntryForm = (props: ItemEntryFormProps) => {
   };
 
   const addNewActionType = (forwardAction: string, backwardAction: string) => {
-    actionTypes.push({
-      actionTypeId: getActionTypeId(),
-      action: forwardAction,
-      mirrorAction: backwardAction,
-    });
-
-    actionTypes.push({
-      actionTypeId: getActionTypeId(),
-      action: backwardAction,
-      mirrorAction: forwardAction,
-    });
+    setActionTypes([
+      ...actionTypes,
+      {
+        actionTypeId: getActionTypeId(),
+        action: forwardAction,
+        mirrorAction: backwardAction,
+      },
+      {
+        actionTypeId: getActionTypeId(),
+        action: backwardAction,
+        mirrorAction: forwardAction,
+      },
+    ]);
   };
 
   return (
